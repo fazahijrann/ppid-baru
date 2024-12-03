@@ -49,10 +49,12 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark p-0">
                 <a href="index" class="navbar-brand d-flex align-items-center">
-                    <img src="img/logo-ppid.png" alt="Logo" width="50" height="50" class="me-2 img-fluid" style="max-width: 50px;">
+                    <img src="img/logo-ppid.png" alt="Logo" width="50" height="50" class="me-2 img-fluid"
+                        style="max-width: 50px;">
                     <div>
                         <h5 class="text-white mb-0" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">PPID<br>
-                            <span class="text-white" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">KOTA BOGOR</span>
+                            <span class="text-white" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">KOTA
+                                BOGOR</span>
                         </h5>
                     </div>
                 </a>
@@ -63,50 +65,54 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto align-items-center">
                         <!-- Conditionally set the home link -->
-                        @if(Auth::check())
-                        <a href="{{ route('dashboard') }}" class="nav-item nav-link">Home</a>
+                        @if (Auth::check())
+                            <a href="{{ route('dashboard') }}" class="nav-item nav-link">Home</a>
                         @else
-                        <a href="{{ route('welcome') }}" class="nav-item nav-link">Home</a>
+                            <a href="{{ route('welcome') }}" class="nav-item nav-link">Home</a>
                         @endif
                         <a href="profileppid" class="nav-item nav-link">Profile</a>
                         <a href="regulasi" class="nav-item nav-link">Regulasi</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Layanan & Informasi Publik</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Layanan &
+                                Informasi Publik</a>
                             <div class="dropdown-menu bg-light mt-2">
                                 <a href="informasipublik" class="dropdown-item">Informasi Publik</a>
                                 <a href="pengajuan" class="dropdown-item">Permohonan Informasi</a>
                                 @guest
-                                <a href="{{ route('cekstatus') }}" class="dropdown-item">Cek Status Permohonan</a>
+                                    <a href="{{ route('cekstatus') }}" class="dropdown-item">Cek Status Permohonan</a>
                                 @else
-                                <a href="{{ route('cek') }}" class="dropdown-item">Cek Status Permohonan</a>
+                                    <a href="{{ route('cek') }}" class="dropdown-item">Cek Status Permohonan</a>
                                 @endguest
                             </div>
                         </div>
                         <a href="daftarinformasipublik" class="nav-item nav-link">Daftar Informasi Publik</a>
-                        <a href="https://sibadra.kotabogor.go.id/#/" class="nav-item nav-link btn btn-md border rounded-pill text-white px-3">SIBADRA</a>
+                        <a href="https://sibadra.kotabogor.go.id/#/"
+                            class="nav-item nav-link btn btn-md border rounded-pill text-white px-3">SIBADRA</a>
                     </div>
 
                     @if (Auth::check())
-                    <!-- Profile Dropdown -->
-                    <div class="nav-item dropdown d-flex align-items-center justify-content-center">
-                        <a href="#" class="nav-link dropdown-toggle text-white d-flex align-items-center justify-content-center">
-                            <i class="fa fa-user-circle fa-2x text-white"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">Info Profil</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('profile.edit') }}">Ubah Password</a>
-                            </li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">Logout</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
+                        <!-- Profile Dropdown -->
+                        <div class="nav-item dropdown d-flex align-items-center justify-content-center">
+                            <a href="#"
+                                class="nav-link dropdown-toggle text-white d-flex align-items-center justify-content-center">
+                                <i class="fa fa-user-circle fa-2x text-white"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#profileModal">Info Profil</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">Ubah Password</a>
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                     @endif
 
                     <button type="button" class="nav-item nav-link btn btn-sm text-white p-0" data-bs-toggle="modal"
@@ -123,26 +129,32 @@
         <div class="container pt-5">
             <div class="row g-5 pt-5">
                 <div class="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
-                    <h1 class="display-4 text-white mb-4 animated slideInRight" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">KEBERATAN INFORMASI</h1>
-                    <h3 class="text-white mb-4 animated slideInRight" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Form Pengajaun Keberatan Informasi Publik</h3>
+                    <h1 class="display-4 text-white mb-4 animated slideInRight"
+                        style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">KEBERATAN INFORMASI</h1>
+                    <h3 class="text-white mb-4 animated slideInRight"
+                        style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Form Pengajaun Keberatan Informasi Publik
+                    </h3>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center justify-content-lg-start mb-0">
-                            @if(Auth::check())
-                            <li class="breadcrumb-item">
-                                <a class="text-white" href="{{ route('dashboard') }}">Home</a>
-                            </li>
+                            @if (Auth::check())
+                                <li class="breadcrumb-item">
+                                    <a class="text-white" href="{{ route('dashboard') }}">Home</a>
+                                </li>
                             @else
-                            <li class="breadcrumb-item">
-                                <a class="text-white" href="{{ route('welcome') }}">Home</a>
-                            </li>
+                                <li class="breadcrumb-item">
+                                    <a class="text-white" href="{{ route('welcome') }}">Home</a>
+                                </li>
                             @endif
-                            <li class="breadcrumb-item"><a class="text-white" href="keberataninformasi">Keberatan Informasi</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="keberataninformasi">Keberatan
+                                    Informasi</a></li>
                         </ol>
                     </nav>
                 </div>
                 <div class="col-lg-6 align-self-center text-center text-lg-end">
-                    <img class="img-fluid me-3  animated slideInRight" src="img/logo-pemkot-bogor.png" alt="" style="max-width: 80px;">
-                    <img class="img-fluid animated slideInRight" src="img/logo-ppid.png" alt="" style="max-width: 100px;">
+                    <img class="img-fluid me-3  animated slideInRight" src="img/logo-pemkot-bogor.png" alt=""
+                        style="max-width: 80px;">
+                    <img class="img-fluid animated slideInRight" src="img/logo-ppid.png" alt=""
+                        style="max-width: 100px;">
                 </div>
             </div>
         </div>
@@ -150,7 +162,8 @@
     <!-- Hero End -->
 
     <!-- Profile Modal -->
-    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -159,21 +172,21 @@
                 </div>
                 <div class="modal-body">
                     @if (Auth::check())
-                    <!-- Tampilkan informasi pemohon jika masuk -->
-                    <p><strong>Nama :</strong> {{ Auth::user()->nama }}</p>
-                    <p><strong>No. Pendaftaran :</strong> {{ Auth::user()->no_pendaftaran }}</p>
-                    <p><strong>Email :</strong> {{ Auth::user()->email }}</p>
+                        <!-- Tampilkan informasi pemohon jika masuk -->
+                        <p><strong>Nama :</strong> {{ Auth::user()->nama }}</p>
+                        <p><strong>No. Pendaftaran :</strong> {{ Auth::user()->no_pendaftaran }}</p>
+                        <p><strong>Email :</strong> {{ Auth::user()->email }}</p>
                     @else
-                    <!-- Pesan jika tidak ada pengguna yang masuk -->
-                    <p>Tidak ada pengguna yang masuk.</p>
+                        <!-- Pesan jika tidak ada pengguna yang masuk -->
+                        <p>Tidak ada pengguna yang masuk.</p>
                     @endif
                 </div>
                 <div class="modal-footer">
                     @if (Auth::check())
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">Logout</button>
-                    </form>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Logout</button>
+                        </form>
                     @endif
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 </div>
@@ -218,25 +231,60 @@
                                 <!-- Hidden Field: ID Pemohon -->
                                 <input type="hidden" name="id_pemohon" value="{{ $pemohon->id ?? '' }}">
 
-                                <x-text-input id="no_keberatan_informasi" class="block mt-1 w-full" type="hidden" name="no_keberatan_informasi" :value="$newKeberatanInformasi" required readonly />
+                                <x-text-input id="no_keberatan_informasi" class="block mt-1 w-full" type="hidden"
+                                    name="no_keberatan_informasi" :value="$newKeberatanInformasi" required readonly />
+
+
+                                <fieldset class="border p-4 mb-4 rounded">
+                                    <legend class="w-auto p-2 text-white bg-primary rounded">NOMOR PERMOHONAN INFORMASI
+                                        *</legend>
+                                    <div class="form-group mb-3">
+                                        <label for="id_permohonan_informasi" class="text-dark fw-bold">Nomor
+                                            Permohonan Informasi</label>
+                                        <select name="id_permohonan_informasi" class="form-control bg-white"
+                                            id="id_permohonan_informasi">
+                                            <option value="">Pilih Salah Satu</option>
+                                            @foreach ($keputusanInformasi as $data)
+                                                @if (
+                                                    $data->tandaBukti &&
+                                                        $data->tandaBukti->permohonaninformasibukti &&
+                                                        $data->tandaBukti->permohonaninformasibukti->id_pemohon === Auth::id())
+                                                    <option value="{{ $data->id }}">
+                                                        {{ $data->tandaBukti->permohonaninformasibukti->no_permohonan_informasi }},
+                                                        Status {{ $data->status }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                        @error('id_permohonan_informasi')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </fieldset>
+
 
                                 <!-- Alasan Pengajuan Keberatan -->
                                 <fieldset class="border p-4 mb-4 rounded">
-                                    <legend class="w-auto p-2 text-white bg-primary rounded">ALASAN PENGAJUAN KEBERATAN *</legend>
+                                    <legend class="w-auto p-2 text-white bg-primary rounded">ALASAN PENGAJUAN KEBERATAN
+                                        *</legend>
                                     <div class="checkbox-group">
                                         <!-- Pastikan variabel $kategori_keberatan diterima -->
-                                        @if(isset($kategori_keberatan) && $kategori_keberatan->isNotEmpty())
-                                        @foreach($kategori_keberatan as $kategori)
-                                        <div class="form-check">
-                                            <!-- Ganti checkbox menjadi radio button -->
-                                            <input type="radio" id="check_{{ $kategori->id }}" name="kategori_keberatan_id" value="{{ $kategori->id }}" class="form-check-input">
-                                            <label for="check_{{ $kategori->id }}" class="form-check-label">{{ $kategori->jenis_keberatan }}</label>
-                                        </div>
-                                        @endforeach
+                                        @if (isset($kategori_keberatan) && $kategori_keberatan->isNotEmpty())
+                                            @foreach ($kategori_keberatan as $kategori)
+                                                <div class="form-check">
+                                                    <!-- Ganti checkbox menjadi radio button -->
+                                                    <input type="radio" id="check_{{ $kategori->id }}"
+                                                        name="kategori_keberatan_id" value="{{ $kategori->id }}"
+                                                        class="form-check-input">
+                                                    <label for="check_{{ $kategori->id }}"
+                                                        class="form-check-label">{{ $kategori->jenis_keberatan }}</label>
+                                                </div>
+                                            @endforeach
                                         @else
-                                        <p>Kategori keberatan belum tersedia.</p>
+                                            <p>Kategori keberatan belum tersedia.</p>
                                         @endif
-                                        <p class="text-muted mt-2">(Sesuai dengan Pasal 35 UU KIP, dipilih oleh pengaju keberatan sesuai dengan alasan keberatan yang diajukan)</p>
+                                        <p class="text-muted mt-2">(Sesuai dengan Pasal 35 UU KIP, dipilih oleh pengaju
+                                            keberatan sesuai dengan alasan keberatan yang diajukan)</p>
                                     </div>
                                 </fieldset>
 
@@ -251,15 +299,22 @@
 
                                 <!-- Tanggal Tanggapan -->
                                 <fieldset class="border p-4 mb-4 rounded">
-                                    <legend class="w-auto p-2 text-white bg-primary rounded">HARI/TANGGAL TANGGAPAN ATAS KEBERATAN AKAN DIBERIKAN</legend>
-                                    <p class="text-muted">Tanggapan atas keberatan pemohon informasi publik akan disampaikan dalam jangka waktu paling lambat 30 (tiga puluh) hari kerja sejak diterimanya keberatan.</p>
-                                    <p class="text-muted">Demikian keberatan ini saya sampaikan, atas perhatian dan tanggapannya, saya ucapkan terimakasih.</p>
+                                    <legend class="w-auto p-2 text-white bg-primary rounded">HARI/TANGGAL TANGGAPAN
+                                        ATAS KEBERATAN AKAN DIBERIKAN</legend>
+                                    <p class="text-muted">Tanggapan atas keberatan pemohon informasi publik akan
+                                        disampaikan dalam jangka waktu paling lambat 30 (tiga puluh) hari kerja sejak
+                                        diterimanya keberatan.</p>
+                                    <p class="text-muted">Demikian keberatan ini saya sampaikan, atas perhatian dan
+                                        tanggapannya, saya ucapkan terimakasih.</p>
                                 </fieldset>
 
                                 <!-- Persetujuan -->
                                 <div class="form-check mb-4">
-                                    <input type="checkbox" class="form-check-input" id="check" name="persetujuan" value="1" required>
-                                    <label class="form-check-label text-dark fw-bold" for="check">Dengan ini, saya menyatakan data yang saya isi adalah benar dan dapat dipertanggungjawabkan</label>
+                                    <input type="checkbox" class="form-check-input" id="check"
+                                        name="persetujuan" value="1" required>
+                                    <label class="form-check-label text-dark fw-bold" for="check">Dengan ini, saya
+                                        menyatakan data yang saya isi adalah benar dan dapat
+                                        dipertanggungjawabkan</label>
                                 </div>
 
                                 <!-- Tombol Kirim -->
@@ -275,15 +330,15 @@
     </div>
     <!-- Form Pengajuan Keberatan End -->
 
-    @if(session()->has('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: "<?php echo session()->get('success'); ?>",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    </script>
+    @if (session()->has('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: "<?php echo session()->get('success'); ?>",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
     @endif
 
     <!-- Footer Start -->
@@ -295,7 +350,8 @@
                     <a href="index.html" class="d-inline-block mb-3">
                         <h1 class="text-white">PPID<span class="text-primary"><br></span>Kota Bogor</h1>
                     </a>
-                    <img class="img-fluid me-3" src="img/logo-pemkot-bogor.png" alt="" style="max-width: 80px;">
+                    <img class="img-fluid me-3" src="img/logo-pemkot-bogor.png" alt=""
+                        style="max-width: 80px;">
                     <img class="img-fluid" src="img/logo-ppid.png" alt="" style="max-width: 100px;">
                 </div>
                 <div class="col-md-4 wow fadeIn" data-wow-delay="0.3s">
@@ -314,10 +370,14 @@
                         <span>kominfo@kotabogor.go.id</span>
                     </div>
                     <div class="d-flex text-white justify-content-center pt-2">
-                        <a class="btn btn-outline-light btn-social mx-1" href="https://x.com/kominfobogor"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="https://x.com/kominfobogor"><i
+                                class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href=""><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href=""><i
+                                class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href=""><i
+                                class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4 text-white wow fadeIn text-center" data-wow-delay="0.5s">
@@ -344,7 +404,8 @@
 
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up"></i></a>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top pt-2"><i
+            class="bi bi-arrow-up"></i></a>
 
 
     <!-- JavaScript Libraries -->

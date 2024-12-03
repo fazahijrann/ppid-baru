@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KeberatanInformasi;
-use App\Models\KategoriKeberatan;
+use Carbon\Carbon;
 use App\Models\Pemohon;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
+use App\Models\KategoriKeberatan;
+use App\Models\KeberatanInformasi;
+use App\Models\KeputusanInformasi;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -22,8 +24,18 @@ class KeberatanController extends Controller
             return redirect()->back()->with('error', 'Data pemohon tidak ditemukan.');
         }
 
+        // $keputusanInformasi = KeputusanInformasi::with('tandaBukti')->get();
+        // dd($keputusanInformasi->tandaBukti);
+
+        // $keputusanInformasi = KeputusanInformasi::get();
+
+        $keputusanInformasi = KeputusanInformasi::with('tandaBukti.permohonaninformasibukti')
+            ->whereIn('status', ['Diterima', 'Ditolak'])
+            ->get();        // dd($keputusanInformasi);
+
         // Ambil data kategori untuk ditampilkan di form
         $kategori_keberatan = KategoriKeberatan::all();
+
 
         // Mendapatkan nomor pendaftaran terakhir dari bulan dan tahun yang sama
         $currentMonth = Carbon::now()->format('m'); // Mendapatkan bulan sekarang
@@ -42,38 +54,47 @@ class KeberatanController extends Controller
         // Format nomor pendaftaran: "reg-bulan-tahun-noUrut"
         $newKeberatanInformasi = sprintf('ppid-keberatan-%02d-%s-%04d', $currentMonth, $currentYear, $noUrut);
 
-        // Debugging: Cek apakah kategori keberatan berhasil diambil
-        // if ($kategori_keberatan->isEmpty()) {
-        //     dd('Kategori keberatan tidak ditemukan.');
-        // }
 
-        return view('keberataninformasi', compact('pemohon', 'kategori_keberatan', 'newKeberatanInformasi'));
+
+        return view('keberataninformasi', compact('pemohon', 'kategori_keberatan', 'newKeberatanInformasi', 'keputusanInformasi'));
     }
 
     public function store(Request $request)
     {
+        // Validasi form
         $request->validate([
-            'kategori_keberatan_id' => 'required|exists:kategori_keberatan,id', // Validasi sebagai single value, bukan array
+            'kategori_keberatan_id' => 'required|exists:kategori_keberatan,id',
+            'id_permohonan_informasi' => 'required|exists:keputusan_informasi,id', // Validasi id_keputusan
         ]);
+
+        // Ambil keputusan berdasarkan ID yang dipilih
+        $keputusan = KeputusanInformasi::find($request->id_permohonan_informasi);
+
+        // Pastikan keputusan ditemukan
+        if (!$keputusan) {
+            return redirect()->back()->with('error', 'Keputusan informasi tidak ditemukan.');
+        }
 
         // Ambil data pemohon berdasarkan user yang sedang login
         $pemohon = Auth::user();
-        // Periksa apakah pemohon ditemukan
         if (!$pemohon) {
             return redirect()->back()->with('error', 'Data pemohon tidak ditemukan.');
         }
 
-        // Simpan data ke tabel keberatan_informasi untuk setiap kategori yang dipilih
+        // Simpan data keberatan_informasi
         KeberatanInformasi::create([
             'no_keberatan_informasi' => $request->no_keberatan_informasi,
             'id_pemohon' => $pemohon->id,
-            'keputusan_informasi_id' => null, // Set nilai otomatis menjadi 1
+            'keputusan_informasi_id' => $keputusan->id, // Simpan ID keputusan
             'kategori_keberatan_id' => $request->input('kategori_keberatan_id'),
             'keterangan' => $request->input('keterangan'),
             'tgl_keberatan' => Carbon::now(),
         ]);
 
-        // Redirect ke halaman cek setelah data tersimpan
+        // dd($request->all()); // Memeriksa data yang diterima
+
+
+        // Redirect setelah sukses
         return redirect()->route('cek')->with('success', 'Keberatan berhasil diajukan!');
     }
 }
