@@ -26,9 +26,14 @@ class KeputusanInformasi extends Model
     //     return $this->hasOne(PermohonanInformasi::class, 'pernyataan', 'id');
     // }
 
+    public function pemohon()
+    {
+        return $this->belongsTo(Pemohon::class, 'id_pemohon');
+    }
+
     public function tandaBukti()
     {
-        return $this->hasOne(TandaBuktiPenerimaan::class, 'tanda_buktipenerimaan_id');
+        return $this->hasOne(TandaBuktiPenerimaan::class, 'id');
     }
 
     public function keberatanInformasi()

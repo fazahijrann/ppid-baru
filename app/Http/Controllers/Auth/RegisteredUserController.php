@@ -51,7 +51,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // Validasi data yang diterima dari form
         $request->validate([
             'no_pendaftaran' => ['required'],
             'nama' => ['required', 'string', 'max:30'],
@@ -63,62 +62,28 @@ class RegisteredUserController extends Controller
             'file_ktp' => ['required', 'file', 'mimes:pdf,png', 'max:2048'],
             'password' => ['required', Rules\Password::defaults()],
             'id_kategori' => ['required', 'exists:kategori_pemohon,id_kategori'],
-
-            // Validasi tambahan untuk kategori "Badan Hukum"
-            'nama_kuasa' => ['nullable', 'string', 'max:30'], // Optional jika bukan badan hukum
-            'alamat_kuasa' => ['nullable', 'string', 'max:100'],
-            'no_tlp_kuasa' => ['nullable', 'string', 'max:15'],
-            'sk_badanhukum' => ['nullable', 'file', 'mimes:pdf', 'max:2048'], // File PDF untuk SK Badan Hukum
         ]);
 
-        // Simpan file KTP ke folder 'public/ktp'
-        if ($request->hasFile('file_ktp')) {
-            $fileKtp = $request->file('file_ktp');
-            $fileKtpName = time() . '_' . $fileKtp->getClientOriginalName();
-            $fileKtp->move(public_path('ktp'), $fileKtpName); // Simpan ke folder 'ktp'
+        $pemohonData = $request->except(['file_ktp', 'sk_badanhukum', 'password']);
+        $pemohonData['file_ktp'] = $request->file('file_ktp')->store('ktp', 'public');
+        $pemohonData['password'] = Hash::make($request->password);
+
+        if ($request->id_kategori == 2) {
+            $request->validate([
+                'nama_kuasa' => ['required', 'string', 'max:30'],
+                'alamat_kuasa' => ['required', 'string', 'max:100'],
+                'no_tlp_kuasa' => ['required', 'string', 'max:15'],
+                'sk_badanhukum' => ['required', 'file', 'mimes:pdf', 'max:2048'],
+            ]);
+
+            $pemohonData['sk_badanhukum'] = $request->file('sk_badanhukum')->store('sk_badanhukum', 'public');
+            $pemohonData += $request->only(['nama_kuasa', 'alamat_kuasa', 'no_tlp_kuasa']);
         }
 
-        // Siapkan data pemohon yang bersifat umum
-        $pemohonData = [
-            'no_pendaftaran' => $request->no_pendaftaran,
-            'nama' => $request->nama,
-            'nik' => $request->nik,
-            'alamat' => $request->alamat,
-            'no_tlp' => $request->no_tlp,
-            'email' => $request->email,
-            'pekerjaan' => $request->pekerjaan,
-            'file_ktp' => 'ktp/' . $fileKtpName,  // Simpan path file KTP
-            'password' => Hash::make($request->password),
-            'id_kategori' => $request->id_kategori,
-        ];
-
-        // Jika kategori adalah Badan Hukum (ID 2), tambahkan data kuasa dan simpan file SK Badan Hukum
-        if ($request->id_kategori == 2) { // Asumsi ID 2 adalah untuk "Badan Hukum"
-            if ($request->hasFile('sk_badanhukum')) {
-                $fileSkBadanHukum = $request->file('sk_badanhukum');
-                $fileSkBadanHukumName = time() . '_' . $fileSkBadanHukum->getClientOriginalName();
-                $fileSkBadanHukum->move(public_path('sk_badanhukum'), $fileSkBadanHukumName); // Simpan ke folder 'sk_badanhukum'
-            }
-
-            $pemohonData['keputusan_informsi'] = '1';
-
-
-            $pemohonData['nama_kuasa'] = $request->nama_kuasa;
-            $pemohonData['alamat_kuasa'] = $request->alamat_kuasa;
-            $pemohonData['no_tlp_kuasa'] = $request->no_tlp_kuasa;
-            $pemohonData['sk_badanhukum'] = 'sk_badanhukum/' . $fileSkBadanHukumName;
-        }
-
-        // Buat pemohon baru dengan data yang sudah disiapkan
         $pemohon = Pemohon::create($pemohonData);
-
-        // Kirimkan event bahwa pemohon baru telah terdaftar
         event(new Registered($pemohon));
-
-        // Login pemohon setelah berhasil registrasi (hapus baris ini jika tidak ingin login otomatis)
         Auth::login($pemohon);
 
-        // Redirect ke halaman login setelah registrasi sukses
-        return redirect(route('dashboard'));
+        return redirect(route('dashboard'))->with('success', 'Registrasi berhasil!');
     }
 }
