@@ -25,7 +25,7 @@
                         <a href="{{ route('welcome') }}"
                             class="nav-item nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}">Home</a>
                     @endif
-                    <a href="profileppid"
+                    <a href="{{ route('profileppid') }}"
                         class="nav-item nav-link {{ request()->routeIs('profileppid') ? 'active' : '' }}">Profile</a>
                     <a href="regulasi" class="nav-item nav-link">Regulasi</a>
                     <div class="nav-item dropdown">

@@ -211,34 +211,40 @@
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-xl-3 col-lg-6 mb-0 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="service-item d-flex flex-column justify-content-center text-center rounded">
-                        <div class="service-icon btn-square">
-                            <i class="fa fa-edit fa-2x"></i>
+                    <a href="permohonaninformasi">
+                        <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                            <div class="service-icon btn-square">
+                                <i class="fa fa-edit fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">PERMOHONAN INFORMASI</h5>
+                            <p>Form Permohonan Informasi Publik</p>
+                            <a class="btn px-3 mt-auto mx-auto" href="permohonaninformasi">Buat</a>
                         </div>
-                        <h5 class="mb-3">PERMOHONAN INFORMASI</h5>
-                        <p>Form Permohonan Informasi Publik</p>
-                        <a class="btn px-3 mt-auto mx-auto" href="permohonaninformasi">Buat</a>
-                    </div>
+                    </a>
+                </div>
+                <div class="col-xl-3 col-lg-6 mb-0 wow fadeIn" data-wow-delay="0.3s">
+                    <a href="keberataninformasi">
+                        <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                            <div class="service-icon btn-square">
+                                <i class="fa fa-edit fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">PENGAJUAN KEBERATAN INFORMASI</h5>
+                            <p>Form Pengajuan Keberatan Informasi Publik</p>
+                            <a class="btn px-3 mt-auto mx-auto" href="keberataninformasi">Buat</a>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-xl-3 col-lg-6 mb-0 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="service-item d-flex flex-column justify-content-center text-center rounded">
-                        <div class="service-icon btn-square">
-                            <i class="fa fa-edit fa-2x"></i>
+                    <a href="cek">
+                        <div class="service-item d-flex flex-column justify-content-center text-center rounded">
+                            <div class="service-icon btn-square">
+                                <i class="fa fa-check-circle fa-2x"></i>
+                            </div>
+                            <h5 class="mb-3">CEK STATUS</h5><br>
+                            <p>Cek Status Permohonan / Keberatan</p>
+                            <a class="btn px-3 mt-auto mx-auto" href="cek">Cek</a>
                         </div>
-                        <h5 class="mb-3">PENGAJUAN KEBERATAN INFORMASI</h5>
-                        <p>Form Pengajuan Keberatan Informasi Publik</p>
-                        <a class="btn px-3 mt-auto mx-auto" href="keberataninformasi">Buat</a>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 mb-0 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="service-item d-flex flex-column justify-content-center text-center rounded">
-                        <div class="service-icon btn-square">
-                            <i class="fa fa-check-circle fa-2x"></i>
-                        </div>
-                        <h5 class="mb-3">CEK STATUS</h5><br>
-                        <p>Cek Status Permohonan / Keberatan</p>
-                        <a class="btn px-3 mt-auto mx-auto" href="cek">Cek</a>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

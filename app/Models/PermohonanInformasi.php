@@ -23,6 +23,11 @@ class PermohonanInformasi extends Model
         'pernyataan',
     ];
 
+    public function pemohon()
+    {
+        return $this->belongsTo(Pemohon::class, 'id_pemohon');
+    }
+
     // Relasi dengan tabel kategori_memperoleh
     public function kategoriMemperoleh()
     {
@@ -38,5 +43,10 @@ class PermohonanInformasi extends Model
     public function tandaBuktiPenerimaan()
     {
         return $this->hasOne(TandaBuktiPenerimaan::class, 'permohonan_id', 'id');
+    }
+
+    public function penerima()
+    {
+        return $this->belongsTo(User::class, 'id_penerima');
     }
 }

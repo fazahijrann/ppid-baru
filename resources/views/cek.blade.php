@@ -37,6 +37,8 @@
 </head>
 
 <body>
+    @include('partials.modal-cek')
+
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -269,7 +271,23 @@
                                                     @endif
 
                                                 </td>
-                                                <td></td>
+                                                <td>
+                                                    {{-- @if (optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status === null || optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status === 'Diproses')
+                                                        <button type="button" class="btn btn-primary"
+                                                            disabled>Lihat</button>
+                                                    @elseif (in_array(optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status, ['Diterima', 'Ditolak']))
+                                                        <a href="{{ route('permohonan.pdf', $data->no_permohonan_informasi) }}"
+                                                            class="text-white">
+                                                            <button type="button"
+                                                                class="btn btn-primary">Lihat</button>
+                                                        </a>
+                                                    @endif --}}
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#dokumen-modal-{{ $data->id }}">
+                                                        Dokumen
+                                                    </button>
+                                                </td>
                                             </tr>
                                         @endforeach
 
@@ -405,8 +423,14 @@
                 "responsive": true // Membuat tabel responsif
             });
         });
-    </script>
 
+        const myModal = document.getElementById('myModal')
+        const myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', () => {
+            myInput.focus()
+        })
+    </script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
