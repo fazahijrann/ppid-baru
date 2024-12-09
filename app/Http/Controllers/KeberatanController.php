@@ -87,6 +87,7 @@ class KeberatanController extends Controller
             'id_pemohon' => $pemohon->id,
             'keputusan_informasi_id' => $keputusan->id, // Simpan ID keputusan
             'kategori_keberatan_id' => $request->input('kategori_keberatan_id'),
+            'status' => 'Menunggu',
             'keterangan' => $request->input('keterangan'),
             'tgl_keberatan' => Carbon::now(),
         ]);
