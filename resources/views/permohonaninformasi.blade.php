@@ -268,7 +268,7 @@
                                     <div class="form-group mb-3">
                                         <label for="id_kategori_memperoleh" class="text-dark fw-bold">Cara Memperoleh
                                             Informasi</label>
-                                        <select name="id_kategori_memperoleh" class="form-control"
+                                        <select name="id_kategori_memperoleh" class="form-control bg-white"
                                             id="id_kategori_memperoleh">
                                             <option value="">- Pilih -</option>
                                             <!-- @if (isset($kategori_memperoleh) && $kategori_memperoleh->count()) -->
@@ -289,7 +289,7 @@
                                     <div class="form-group mb-3">
                                         <label for="id_kategori_salinan" class="text-dark fw-bold">Cara Mendapatkan
                                             Salinan Informasi</label>
-                                        <select name="id_kategori_salinan" class="form-control"
+                                        <select name="id_kategori_salinan" class="form-control bg-white"
                                             id="id_kategori_salinan">
                                             <option value="">- Pilih -</option>
                                             @if (isset($kategori_salinan) && $kategori_salinan->count())

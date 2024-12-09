@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PermohonanInformasiController;
 use App\Http\Controllers\KeberatanController;
 use App\Http\Controllers\CekStatusController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\StatistikPengunjung;
 
@@ -86,8 +87,8 @@ Route::get('/cekstatus', [CekStatusController::class, 'showCekStatus'])->name('c
 // });
 
 Route::get('/profileppid', function () {
-    return view('profileppid')->name('profileppid');
-});
+    return view('profileppid');
+})->name('profileppid');
 
 Route::get('/ppidutama', function () {
     return view('ppidutama');
@@ -114,6 +115,12 @@ Route::get('/cekstatus', function () {
     return view('cekstatus');
 })->name('cekstatus');
 
+
+Route::get('/permohonan/{no_permohonan_informasi}/pdf', [PdfController::class, 'permohonan'])->name('permohonan.pdf');
+
+Route::get('/bukti/{no_permohonan_informasi}/pdf', [PdfController::class, 'bukti'])->name('bukti.pdf');
+
+Route::get('/keputusan-permohonan/{no_permohonan_informasi}/pdf', [PdfController::class, 'keppermohonan'])->name('keppermohonan.pdf');
 
 // Authentication routes
 require __DIR__ . '/auth.php';

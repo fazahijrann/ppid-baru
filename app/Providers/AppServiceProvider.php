@@ -12,6 +12,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // Daftarkan view composer
         View::composer('*', StatistikComposer::class);
+        setlocale(LC_TIME, 'id_ID.UTF-8');
+        \Carbon\Carbon::setLocale('id');
     }
     /**
      * Register any application services.
