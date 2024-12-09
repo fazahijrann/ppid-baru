@@ -284,7 +284,8 @@
                                                     @endif --}}
                                                     <!-- Button trigger modal -->
                                                     <button type="button" class="btn btn-primary"
-                                                        data-bs-toggle="modal" data-bs-target="#dokumen-modal-{{ $data->id }}">
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#dokumen-modal-{{ $data->id }}">
                                                         Dokumen
                                                     </button>
                                                 </td>
@@ -300,7 +301,7 @@
                                                 <td>Keberatan Informasi</td>
                                                 <td>{{ $data->keterangan }}</td>
                                                 <td>{{ $data->created_at->format('d-m-Y') }}</td>
-                                                <td></td>
+                                                <td>{{ $data->status }}</td>
                                                 <td></td>
                                             </tr>
                                         @endforeach

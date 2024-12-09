@@ -36,7 +36,7 @@ class CekStatusController extends Controller
 
 
         $keberatan_informasi = KeberatanInformasi::where('id_pemohon', $pemohon->id)
-            ->select('no_keberatan_informasi', 'keterangan', 'tgl_keberatan', 'created_at')
+            ->select('no_keberatan_informasi', 'status', 'keterangan', 'tgl_keberatan', 'created_at')
             ->get();
 
         // Kirim data ke view
