@@ -34,7 +34,12 @@ class PdfController extends Controller
         $data = PermohonanInformasi::where('no_permohonan_informasi', $no_permohonan_informasi)->firstOrFail();
         $tanggal = 'tanggal ' . Carbon::parse($data->tgl_permohonan)->translatedFormat('d') . ' bulan ' . Carbon::parse($data->tgl_permohonan)->translatedFormat('F') . ' tahun ' . Carbon::parse($data->tgl_permohonan)->translatedFormat('Y');
 
-        $pdf = PDF::loadview('pdf.keputusan-permohonan', compact('data', 'tanggal'))->setPaper('f4', 'potrait');
+        $checks = [
+            '01101011' => 'Informasi yang diminta belum dikuasai',
+            '01100100' => 'Informasi yang diminta belum didokumentasikan'
+        ];
+
+        $pdf = PDF::loadview('pdf.keputusan-permohonan', compact('data', 'tanggal', 'checks'))->setPaper('f4', 'potrait');
         return $pdf->stream('Permohonan Informasi - ' . $data->no_permohonan_informasi . '.pdf');
 
         // return view('pdf.permohonan', compact('data', 'tanggal'));
