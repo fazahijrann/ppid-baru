@@ -148,35 +148,20 @@
             </tr>
         </table>
         <table>
-            <tr>
-                <td style="vertical-align: middle; padding: 3px;">
-                    @if ($data->tandabuktipenerimaan->tandaKeputusan?->keterangan === 'dikuasai')
-                        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('img/icon/check.png'))) }}"
+            @foreach ($checks as $code => $description)
+                <tr>
+                    <td style="vertical-align: middle; padding: 3px;">
+                        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('img/icon/' . ($data->tandabuktipenerimaan->tandaKeputusan?->keterangan === $code ? 'check' : 'square') . '.png'))) }}"
                             style="width: 15px; height: 15px;">
-                    @else
-                        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('img/icon/square.png'))) }}"
-                            style="width: 15px; height: 15px;">
-                    @endif
-                </td>
-                <td style="padding: 3px;">Informasi yang diminta belum dikuasai</td>
-            </tr>
-            <tr>
-                <td style="vertical-align: middle; padding: 3px;">
-                    @if ($data->tandabuktipenerimaan->tandaKeputusan?->keterangan === '01100100')
-                        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('img/icon/check.png'))) }}"
-                            style="width: 15px; height: 15px;">
-                    @else
-                        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('img/icon/square.png'))) }}"
-                            style="width: 15px; height: 15px;">
-                    @endif
-                </td>
-                <td style="padding: 3px;">Informasi yang diminta belum didokumentasikan</td>
-            </tr>
+                    </td>
+                    <td style="padding: 3px;">{{ $description }}</td>
+                </tr>
+            @endforeach
         </table>
         <table width="540">
             <tr>
                 <td>Penyediaan informasi yang belum didokumentasikan dilakukan dalam jangka waktu
-                    @if (in_array($data->tandabuktipenerimaan->tandaKeputusan?->keterangan ?? '', ['dokumentasi', 'dikuasai']))
+                    @if (in_array($data->tandabuktipenerimaan->tandaKeputusan?->keterangan ?? '', ['01101011', '01100100']))
                         {{ $data->tandabuktipenerimaan->tandakeputusan->buktiPenerimaan?->waktu ?? '' }}.
                     @endif
                 </td>
