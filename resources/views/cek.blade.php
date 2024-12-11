@@ -225,7 +225,7 @@
                     <!-- Ganti col-md-6 menjadi col-md-8 -->
                     <!-- Tabel Data Permohonan Informasi dan Keberatan Informasi -->
                     <div class="mt-4">
-                        <div class="card shadow">
+                        <div class="card shadow overflow-auto">
                             <div class="card-header bg-white">
                                 <h5 class="text-center">Daftar Permohonan Informasi & Keberatan</h5>
                             </div>
