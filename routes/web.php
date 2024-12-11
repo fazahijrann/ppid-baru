@@ -122,5 +122,10 @@ Route::get('/bukti/{no_permohonan_informasi}/pdf', [PdfController::class, 'bukti
 
 Route::get('/keputusan-permohonan/{no_permohonan_informasi}/pdf', [PdfController::class, 'keppermohonan'])->name('keppermohonan.pdf');
 
+Route::get('/keberatan/{no_keberatan_informasi}/pdf', [PdfController::class, 'keberatan'])->name('keberatan.pdf');
+
+Route::get('/tanggapan-keberatan/{no_keberatan_informasi}/pdf', [PdfController::class, 'tanggkeberatan'])->name('tanggapan.pdf');
+
+
 // Authentication routes
 require __DIR__ . '/auth.php';

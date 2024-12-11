@@ -51,68 +51,75 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark p-0">
                 <a href="index" class="navbar-brand d-flex align-items-center">
-                    <img src="img/logo-ppid.png" alt="Logo" width="50" height="50" class="me-2 img-fluid" style="max-width: 50px;">
+                    <img src="img/logo-ppid.png" alt="Logo" width="50" height="50" class="me-2 img-fluid"
+                        style="max-width: 50px;">
                     <div>
                         <h5 class="text-white mb-0" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">PPID<br>
-                            <span class="text-white" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">KOTA BOGOR</span>
+                            <span class="text-white" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">KOTA
+                                BOGOR</span>
                         </h5>
                     </div>
                 </a>
-                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto align-items-center">
                         <!-- Conditionally set the home link -->
-                        @if(Auth::check())
-                        <a href="{{ route('dashboard') }}" class="nav-item nav-link">Home</a>
+                        @if (Auth::check())
+                            <a href="{{ route('dashboard') }}" class="nav-item nav-link">Home</a>
                         @else
-                        <a href="{{ route('welcome') }}" class="nav-item nav-link">Home</a>
+                            <a href="{{ route('welcome') }}" class="nav-item nav-link">Home</a>
                         @endif
                         <a href="profileppid" class="nav-item nav-link">Profile</a>
                         <a href="regulasi" class="nav-item nav-link">Regulasi</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Layanan & Informasi Publik</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Layanan &
+                                Informasi Publik</a>
                             <div class="dropdown-menu bg-light mt-2">
                                 <a href="informasipublik" class="dropdown-item">Informasi Publik</a>
                                 <a href="pengajuan" class="dropdown-item">Permohonan Informasi</a>
                                 @guest
-                                <a href="{{ route('cekstatus') }}" class="dropdown-item">Cek Status Permohonan</a>
+                                    <a href="{{ route('cekstatus') }}" class="dropdown-item">Cek Status Permohonan</a>
                                 @else
-                                <a href="{{ route('cek') }}" class="dropdown-item">Cek Status Permohonan</a>
+                                    <a href="{{ route('cek') }}" class="dropdown-item">Cek Status Permohonan</a>
                                 @endguest
                             </div>
                         </div>
                         <a href="daftarinformasipublik" class="nav-item nav-link">Daftar Informasi Publik</a>
-                        <a href="https://sibadra.kotabogor.go.id/#/" class="nav-item nav-link btn btn-md border rounded-pill text-white px-3">SIBADRA</a>
+                        <a href="https://sibadra.kotabogor.go.id/#/"
+                            class="nav-item nav-link btn btn-md border rounded-pill text-white px-3">SIBADRA</a>
                     </div>
 
                     @if (Auth::check())
-                    <!-- Profile Dropdown -->
-                    <div class="nav-item dropdown d-flex align-items-center justify-content-center">
-                        <a href="#" class="nav-link dropdown-toggle text-white d-flex align-items-center justify-content-center">
-                            <i class="fa fa-user-circle fa-2x text-white"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">Info Profil</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('profile.edit') }}">Ubah Password</a>
-                            </li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">Logout</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
+                        <!-- Profile Dropdown -->
+                        <div class="nav-item dropdown d-flex align-items-center justify-content-center">
+                            <a href="#"
+                                class="nav-link dropdown-toggle text-white d-flex align-items-center justify-content-center">
+                                <i class="fa fa-user-circle fa-2x text-white"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#profileModal">Info Profil</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">Ubah Password</a>
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                     @endif
 
                     <!-- Search Button -->
-                    <button type="button" class="nav-item nav-link btn btn-sm text-white p-0 ms-2 me-4" data-bs-toggle="modal"
-                        data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
+                    <button type="button" class="nav-item nav-link btn btn-sm text-white p-0 ms-2 me-4"
+                        data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
                 </div>
             </nav>
         </div>
@@ -124,25 +131,28 @@
         <div class="container pt-5">
             <div class="row g-5 pt-5">
                 <div class="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
-                    <h1 class="display-4 text-white mb-4 animated slideInRight" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">CEK STATUS</h1>
+                    <h1 class="display-4 text-white mb-4 animated slideInRight"
+                        style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">CEK STATUS</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center justify-content-lg-start mb-0">
-                            @if(Auth::check())
-                            <li class="breadcrumb-item">
-                                <a class="text-white" href="{{ route('dashboard') }}">Home</a>
-                            </li>
+                            @if (Auth::check())
+                                <li class="breadcrumb-item">
+                                    <a class="text-white" href="{{ route('dashboard') }}">Home</a>
+                                </li>
                             @else
-                            <li class="breadcrumb-item">
-                                <a class="text-white" href="{{ route('welcome') }}">Home</a>
-                            </li>
+                                <li class="breadcrumb-item">
+                                    <a class="text-white" href="{{ route('welcome') }}">Home</a>
+                                </li>
                             @endif
                             <li class="breadcrumb-item"><a class="text-white" href="cekstatus">Cek Status</a></li>
                         </ol>
                     </nav>
                 </div>
                 <div class="col-lg-6 align-self-center text-center text-lg-end">
-                    <img class="img-fluid me-3  animated slideInRight" src="img/logo-pemkot-bogor.png" alt="" style="max-width: 80px;">
-                    <img class="img-fluid animated slideInRight" src="img/logo-ppid.png" alt="" style="max-width: 100px;">
+                    <img class="img-fluid me-3  animated slideInRight" src="img/logo-pemkot-bogor.png" alt=""
+                        style="max-width: 80px;">
+                    <img class="img-fluid animated slideInRight" src="img/logo-ppid.png" alt=""
+                        style="max-width: 100px;">
                 </div>
             </div>
         </div>
@@ -171,7 +181,8 @@
     <!-- Full Screen Search End -->
 
     <!-- Profile Modal -->
-    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -180,21 +191,21 @@
                 </div>
                 <div class="modal-body">
                     @if (Auth::check())
-                    <!-- Tampilkan informasi pemohon jika masuk -->
-                    <p><strong>Nama :</strong> {{ Auth::user()->nama }}</p>
-                    <p><strong>No. Pendaftaran :</strong> {{ Auth::user()->no_pendaftaran }}</p>
-                    <p><strong>Email :</strong> {{ Auth::user()->email }}</p>
+                        <!-- Tampilkan informasi pemohon jika masuk -->
+                        <p><strong>Nama :</strong> {{ Auth::user()->nama }}</p>
+                        <p><strong>No. Pendaftaran :</strong> {{ Auth::user()->no_pendaftaran }}</p>
+                        <p><strong>Email :</strong> {{ Auth::user()->email }}</p>
                     @else
-                    <!-- Pesan jika tidak ada pengguna yang masuk -->
-                    <p>Tidak ada pengguna yang masuk.</p>
+                        <!-- Pesan jika tidak ada pengguna yang masuk -->
+                        <p>Tidak ada pengguna yang masuk.</p>
                     @endif
                 </div>
                 <div class="modal-footer">
                     @if (Auth::check())
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">Logout</button>
-                    </form>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Logout</button>
+                        </form>
                     @endif
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 </div>
@@ -207,7 +218,8 @@
         <div class="container py-5">
             <div class="row">
                 <!-- Bagian Kiri: Form Cek Status -->
-                <div class="col-md-8 align-items-center justify-content-center"> <!-- Ganti col-md-6 menjadi col-md-8 -->
+                <div class="col-md-8 align-items-center justify-content-center">
+                    <!-- Ganti col-md-6 menjadi col-md-8 -->
                     <div class="card shadow">
                         <div class="card-header bg-white">
                             <h5 class="text-center">Cek Status Informasi</h5>
@@ -228,7 +240,8 @@
                                 <!-- Input Nomor Pendaftaran atau Keberatan -->
                                 <div class="mb-3">
                                     <label for="nomor" class="form-label">Nomor Pendaftaran/Keberatan</label>
-                                    <input id="nomor" type="text" class="form-control" name="nomor" placeholder="Masukkan No Pendaftaran/Keberatan" required>
+                                    <input id="nomor" type="text" class="form-control" name="nomor"
+                                        placeholder="Masukkan No Pendaftaran/Keberatan" required>
                                 </div>
 
                                 <!-- Tombol Cek Status -->
@@ -240,7 +253,8 @@
                     </div>
                 </div>
                 <!-- Bagian Kanan: Gambar -->
-                <div class="col-md-4 d-flex align-items-center justify-content-center"> <!-- Ganti col-md-6 menjadi col-md-4 -->
+                <div class="col-md-4 d-flex align-items-center justify-content-center">
+                    <!-- Ganti col-md-6 menjadi col-md-4 -->
                     <img src="img/status.png" class="img-fluid" alt="Descriptive Image" style="max-width: 400px;">
                 </div>
             </div>
@@ -258,7 +272,8 @@
                     <a href="index.html" class="d-inline-block mb-3">
                         <h1 class="text-white">PPID<span class="text-primary"><br></span>Kota Bogor</h1>
                     </a>
-                    <img class="img-fluid me-3" src="img/logo-pemkot-bogor.png" alt="" style="max-width: 80px;">
+                    <img class="img-fluid me-3" src="img/logo-pemkot-bogor.png" alt=""
+                        style="max-width: 80px;">
                     <img class="img-fluid" src="img/logo-ppid.png" alt="" style="max-width: 100px;">
                 </div>
                 <div class="col-md-4 wow fadeIn" data-wow-delay="0.3s">
@@ -277,10 +292,14 @@
                         <span>kominfo@kotabogor.go.id</span>
                     </div>
                     <div class="d-flex text-white justify-content-center pt-2">
-                        <a class="btn btn-outline-light btn-social mx-1" href="https://x.com/kominfobogor"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="https://x.com/kominfobogor"><i
+                                class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href=""><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href=""><i
+                                class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href=""><i
+                                class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4 text-white wow fadeIn text-center" data-wow-delay="0.5s">
@@ -307,7 +326,8 @@
 
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up"></i></a>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top pt-2"><i
+            class="bi bi-arrow-up"></i></a>
 
 
     <!-- JavaScript Libraries -->

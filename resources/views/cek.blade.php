@@ -37,7 +37,8 @@
 </head>
 
 <body>
-    @include('partials.modal-cek')
+    @include('partials.modal-permohonan')
+    @include('partials.modal-keberatan')
 
     <!-- Spinner Start -->
     <div id="spinner"
@@ -272,20 +273,9 @@
 
                                                 </td>
                                                 <td>
-                                                    {{-- @if (optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status === null || optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status === 'Diproses')
-                                                        <button type="button" class="btn btn-primary"
-                                                            disabled>Lihat</button>
-                                                    @elseif (in_array(optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status, ['Diterima', 'Ditolak']))
-                                                        <a href="{{ route('permohonan.pdf', $data->no_permohonan_informasi) }}"
-                                                            class="text-white">
-                                                            <button type="button"
-                                                                class="btn btn-primary">Lihat</button>
-                                                        </a>
-                                                    @endif --}}
-                                                    <!-- Button trigger modal -->
                                                     <button type="button" class="btn btn-primary"
                                                         data-bs-toggle="modal"
-                                                        data-bs-target="#dokumen-modal-{{ $data->id }}">
+                                                        data-bs-target="#dokumen-permohonan-modal-{{ $data->id }}">
                                                         Dokumen
                                                     </button>
                                                 </td>
@@ -302,7 +292,13 @@
                                                 <td>{{ $data->keterangan }}</td>
                                                 <td>{{ $data->created_at->format('d-m-Y') }}</td>
                                                 <td>{{ $data->status }}</td>
-                                                <td></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#dokumen-keberatan-modal-{{ $data->no_keberatan_informasi }}">
+                                                        Dokumen
+                                                    </button>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
