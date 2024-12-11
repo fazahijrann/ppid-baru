@@ -44,4 +44,40 @@ class PdfController extends Controller
 
         // return view('pdf.permohonan', compact('data', 'tanggal'));
     }
+
+    public function keberatan($no_keberatan_informasi)
+    {
+        $data = KeberatanInformasi::where('no_keberatan_informasi', $no_keberatan_informasi)->firstOrFail();
+
+        $kategorikeb = [
+            1 => 'Permohonan Informasi di tolak.',
+            2 => 'Informasi berkala tidak disediakan',
+            3 => 'Permintaan informasi tidak ditanggapi',
+            4 => 'Permintaan informasi ditanggapi tidak sebagaimana yang diminta',
+            5 => 'Permintaan informasi tidak dipenuhi',
+            6 => 'Biaya yang dikenakan tidak wajar',
+            7 => 'Informasi disampaikan melebihi jangka waktu yang ditentukan',
+        ];
+
+
+
+        $pdf = PDF::loadview('pdf.form-keber', compact('data', 'kategorikeb'))->setPaper('f4', 'potrait');
+        return $pdf->stream('Keberatan Informasi - ' . $data->no_keberatan_informasi . '.pdf');
+    }
+
+    public function tanggkeberatan($no_keberatan_informasi)
+    {
+        $data = KeberatanInformasi::where('no_keberatan_informasi', $no_keberatan_informasi)->firstOrFail();
+
+        $circles = [
+            '01110100' => 'Menolak keberatan pemohon',
+            '01110011' => 'Memberikan sebagaian informasi yang dimohonkan',
+            '01100010' => 'Memberikan informasi yang dimohonkan pemohon',
+        ];
+
+        $waktu = 'tanggal ' . Carbon::parse($data->jangka_waktu)->translatedFormat('d') . ' bulan ' . Carbon::parse($data->jangka_waktu)->translatedFormat('F') . ' tahun ' . Carbon::parse($data->jangka_waktu)->translatedFormat('Y');
+
+        $pdf = PDF::loadview('pdf.tanggapan-keberatan', compact('data', 'circles', 'waktu'))->setPaper('f4', 'potrait');
+        return $pdf->stream('Keberatan Informasi - ' . $data->no_keberatan_informasi . '.pdf');
+    }
 }

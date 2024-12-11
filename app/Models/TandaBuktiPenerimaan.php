@@ -29,4 +29,9 @@ class TandaBuktiPenerimaan extends Model
     {
         return $this->hasOne(KeputusanInformasi::class, 'tanda_buktipenerimaan_id');
     }
+
+    public function permohonanInformasi()
+    {
+        return $this->belongsTo(PermohonanInformasi::class, 'permohonan_id');
+    }
 }

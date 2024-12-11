@@ -1,7 +1,7 @@
 <!-- Modal -->
-@foreach ($permohonan_informasi as $data)
-    <div class="modal fade" id="dokumen-modal-{{ $data->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+@foreach ($keberatan_informasi as $data)
+    <div class="modal fade" id="dokumen-keberatan-modal-{{ $data->no_keberatan_informasi }}" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content text-center">
                 <div class="modal-header">
@@ -12,9 +12,9 @@
                 <div class="modal-body">
                     {{-- Formulir Permohonan Informasi  --}}
                     <h2 class="fs-5">
-                        Formulir Permohonan Informasi
+                        Formulir Pernyataan Keberatan Informasi
                     </h2>
-                    <a href="{{ route('permohonan.pdf', $data->no_permohonan_informasi) }}">
+                    <a href="{{ route('keberatan.pdf', $data->no_keberatan_informasi) }}">
                         <button type="button" class="btn btn-primary">
                             Lihat Dokumen
                         </button>
@@ -23,25 +23,26 @@
                     <hr>
                     {{-- Bukti Penerimaan --}}
                     <h2 class="fs-5">
-                        Bukti Penerimaan Permohonan Informasi
+                        Tanggapan Atasan PPID atas Keberatan
                     </h2>
-                    @if ($data->tandaBuktiPenerimaan->status === 'Menunggu')
+                    @if (optional($data)->status && in_array(optional($data)->status, ['Menunggu', 'Diproses']))
                         <button type="button" class="btn btn-primary" disabled>
                             Lihat Dokumen
                         </button>
                     @else
-                        <a href="{{ route('bukti.pdf', $data->no_permohonan_informasi) }}">
+                        <a href="{{ route('tanggapan.pdf', $data->no_keberatan_informasi) }}">
                             <button type="button" class="btn btn-primary">
                                 Lihat Dokumen
                             </button>
                         </a>
                     @endif
 
+
+
                     <hr>
                     {{-- Keputusan Informasi --}}
-                    <h2 class="fs-5">Keputusan Permohonan Informasi</h2>
-                    @if (optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status === null ||
-                            optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status === 'Diproses')
+                    {{-- <h2 class="fs-5">Keputusan Permohonan Informasi</h2>
+                    @if (optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status === null || optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status === 'Diproses')
                         <button type="button" class="btn btn-primary" disabled>
                             Keputusan Informasi
                         </button>
@@ -51,7 +52,7 @@
                                 Lihat Dokumen
                             </button>
                         </a>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
         </div>
