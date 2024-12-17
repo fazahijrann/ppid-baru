@@ -181,7 +181,9 @@
                                         Pejabat Pengelola Informasi dan Dokumentasi
                                     </strong>
                                 </p>
-                                <p style="margin-top: 120px">Nama Pejabat</p>
+                                <p style="margin-top: 120px">
+                                    {{ $data->tandabuktipenerimaan->tandaKeputusan->pejabatPenerima->name }}
+                                </p>
                             </td>
                         </tr>
                     </table>

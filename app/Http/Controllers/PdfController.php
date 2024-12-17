@@ -60,7 +60,6 @@ class PdfController extends Controller
         ];
 
 
-
         $pdf = PDF::loadview('pdf.form-keber', compact('data', 'kategorikeb'))->setPaper('f4', 'potrait');
         return $pdf->stream('Keberatan Informasi - ' . $data->no_keberatan_informasi . '.pdf');
     }

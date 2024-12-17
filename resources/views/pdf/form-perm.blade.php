@@ -111,7 +111,11 @@
                             <td style="vertical-align: middle;">
                                 <p style="padding-top: 30px">Petugas Penerima Informasi</p>
                                 <p style="margin-top: 100px">
-                                    {{ $data->penerima->name ?? 'Belum Diterima Oleh Petugas' }}
+                                    @if ($data->tandaBuktiPenerimaan->status === 'Ajukan Ulang')
+                                        Ajukan Ulang
+                                    @else
+                                        {{ $data->penerima->name ?? 'Belum Diterima Oleh Petugas' }}
+                                    @endif
                                 </p>
                             </td>
                         </tr>

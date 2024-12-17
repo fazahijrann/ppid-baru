@@ -25,11 +25,11 @@
                     <h2 class="fs-5">
                         Bukti Penerimaan Permohonan Informasi
                     </h2>
-                    @if ($data->tandaBuktiPenerimaan->status === 'Menunggu')
+                    @if (in_array($data->tandaBuktiPenerimaan->status, ['Menunggu', 'Ajukan Ulang']))
                         <button type="button" class="btn btn-primary" disabled>
                             Lihat Dokumen
                         </button>
-                    @else
+                    @elseif ($data->tandaBuktiPenerimaan->status === 'Diteruskan')
                         <a href="{{ route('bukti.pdf', $data->no_permohonan_informasi) }}">
                             <button type="button" class="btn btn-primary">
                                 Lihat Dokumen

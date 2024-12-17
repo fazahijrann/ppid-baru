@@ -192,7 +192,9 @@
                         <tr>
                             <td style="vertical-align: middle;">
                                 <p>Atasan Pejabat Pengelola Informasi Publik</p>
-                                <p style="margin-top: 100px">nama pejabat</p>
+                                <p style="margin-top: 100px">
+                                    {{ $data->tanggapanKeberatan->pejabatPenerima->name }}
+                                </p>
                             </td>
                         </tr>
                     </table>
