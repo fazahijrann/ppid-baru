@@ -27,11 +27,14 @@ class KeberatanController extends Controller
         // $keputusanInformasi = KeputusanInformasi::with('tandaBukti')->get();
         // dd($keputusanInformasi->tandaBukti);
 
-        // $keputusanInformasi = KeputusanInformasi::get();
+        // $keputusanInformasi = KeputusanInformasi::with('tandaBukti', 'tandaBukti.permohonaninformasibukti')
+        //     ->whereIn('status', ['Diterima', 'Ditolak'])
+        //     ->get();
 
-        $keputusanInformasi = KeputusanInformasi::with('tandaBukti', 'tandaBukti.permohonaninformasibukti')
-            ->whereIn('status', ['Diterima', 'Ditolak'])
+        $keputusanInformasi = KeputusanInformasi::with('tandabukti', 'tandabukti.permohonaninformasibukti')
+            ->whereIn('status', ['Ditolak', 'Diterima'])
             ->get();
+
         // dd($keputusanInformasi);
 
         // Ambil data kategori untuk ditampilkan di form

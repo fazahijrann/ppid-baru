@@ -234,7 +234,6 @@
                                 <x-text-input id="no_keberatan_informasi" class="block mt-1 w-full" type="hidden"
                                     name="no_keberatan_informasi" :value="$newKeberatanInformasi" required readonly />
 
-
                                 <fieldset class="border p-4 mb-4 rounded">
                                     <legend class="w-auto p-2 text-white bg-primary rounded">NOMOR PERMOHONAN INFORMASI
                                         *</legend>
@@ -245,13 +244,11 @@
                                             id="id_permohonan_informasi">
                                             <option value="">Pilih Salah Satu</option>
                                             @foreach ($keputusanInformasi as $data)
-                                                @if (
-                                                    $data->tandaBukti &&
-                                                        $data->tandaBukti->permohonaninformasibukti &&
-                                                        $data->tandaBukti->permohonaninformasibukti->id_pemohon === Auth::id())
+                                                @if ($data->tandaBukti->permohonaninformasibukti->id_pemohon === Auth::id())
                                                     <option value="{{ $data->id }}">
                                                         {{ $data->tandaBukti->permohonaninformasibukti->no_permohonan_informasi }},
-                                                        Status {{ $data->status }}
+                                                        Status
+                                                        {{ $data->status }}
                                                     </option>
                                                 @endif
                                             @endforeach

@@ -74,7 +74,14 @@ class PdfController extends Controller
             '01100010' => 'Memberikan informasi yang dimohonkan pemohon',
         ];
 
-        $waktu = 'tanggal ' . Carbon::parse($data->jangka_waktu)->translatedFormat('d') . ' bulan ' . Carbon::parse($data->jangka_waktu)->translatedFormat('F') . ' tahun ' . Carbon::parse($data->jangka_waktu)->translatedFormat('Y');
+        // $waktu = 'tanggal ' . Carbon::parse($data->jangka_waktu)->translatedFormat('d') . ' bulan ' . Carbon::parse($data->jangka_waktu)->translatedFormat('F') . ' tahun ' . Carbon::parse($data->jangka_waktu)->translatedFormat('Y');
+
+        $waktu = $data->tanggapanKeberatan->jangka_waktu
+            ? 'tanggal ' . Carbon::parse($data->tanggapanKeberatan->jangka_waktu)->translatedFormat('d') .
+            ' bulan ' . Carbon::parse($data->tanggapanKeberatan->jangka_waktu)->translatedFormat('F') .
+            ' tahun ' . Carbon::parse($data->tanggapanKeberatan->jangka_waktu)->translatedFormat('Y')
+            : '';
+
 
         $pdf = PDF::loadview('pdf.tanggapan-keberatan', compact('data', 'circles', 'waktu'))->setPaper('f4', 'potrait');
         return $pdf->stream('Keberatan Informasi - ' . $data->no_keberatan_informasi . '.pdf');
