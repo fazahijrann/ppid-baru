@@ -135,7 +135,7 @@
             <div class="row g-5 pt-5">
                 <div class="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
                     <h1 class="display-4 text-white mb-4 animated slideInRight"
-                        style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">CEK STATUS</h1>
+                        style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">CEK STATUS PERMOHONAN</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center justify-content-lg-start mb-0">
                             @if (Auth::check())

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class KeberatanController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
         // Ambil data pemohon berdasarkan user yang sedang login
         $pemohon = Auth::user();
@@ -30,7 +30,7 @@ class KeberatanController extends Controller
         // $keputusanInformasi = KeputusanInformasi::with('tandaBukti', 'tandaBukti.permohonaninformasibukti')
         //     ->whereIn('status', ['Diterima', 'Ditolak'])
         //     ->get();
-
+        $idPermohonanInformasi = $request->input('id_permohonan_informasi'); // Ambil parameter
         $keputusanInformasi = KeputusanInformasi::with('tandabukti', 'tandabukti.permohonaninformasibukti')
             ->whereIn('status', ['Ditolak', 'Diterima'])
             ->get();
@@ -60,7 +60,7 @@ class KeberatanController extends Controller
 
 
 
-        return view('keberataninformasi', compact('pemohon', 'kategori_keberatan', 'newKeberatanInformasi', 'keputusanInformasi'));
+        return view('keberataninformasi', compact('pemohon', 'kategori_keberatan', 'newKeberatanInformasi', 'keputusanInformasi', 'idPermohonanInformasi'));
     }
 
     public function store(Request $request)

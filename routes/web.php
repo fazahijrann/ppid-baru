@@ -9,6 +9,7 @@ use App\Http\Controllers\CekStatusController;
 use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\StatistikPengunjung;
+use App\Models\PermohonanInformasi;
 
 Route::get('/', function () {
     return view('welcome');
@@ -71,8 +72,12 @@ Route::middleware('auth')->group(
         Route::get('/permohonaninformasi', [PermohonanInformasiController::class, 'create'])->name('permohonaninformasi.create'); // Tambahkan ini
         Route::post('/permohonaninformasi', [PermohonanInformasiController::class, 'store'])->name('permohonan.store');
 
+        Route::post('/permohonan-informasi/{id}/terima', [PermohonanInformasiController::class, 'terimaKeputusan'])->name('keputusan.terima');
+
         Route::get('/keberataninformasi', [KeberatanController::class, 'create'])->name('keberataninformasi.create');
         Route::post('/keberataninformasi', [KeberatanController::class, 'store'])->name('keberatan.store');
+
+
 
         Route::get('/cek', [CekStatusController::class, 'cekStatus'])->name('cek')->middleware('auth');
     }
@@ -121,6 +126,8 @@ Route::get('/permohonan/{no_permohonan_informasi}/pdf', [PdfController::class, '
 Route::get('/bukti/{no_permohonan_informasi}/pdf', [PdfController::class, 'bukti'])->name('bukti.pdf');
 
 Route::get('/keputusan-permohonan/{no_permohonan_informasi}/pdf', [PdfController::class, 'keppermohonan'])->name('keppermohonan.pdf');
+
+Route::get('/bukti-penerimaan-tanggapan/{no_permohonan_informasi}/pdf', [PdfController::class, 'bukterimakep'])->name('bukterimakep.pdf');
 
 Route::get('/keberatan/{no_keberatan_informasi}/pdf', [PdfController::class, 'keberatan'])->name('keberatan.pdf');
 

@@ -45,6 +45,17 @@ class PdfController extends Controller
         // return view('pdf.permohonan', compact('data', 'tanggal'));
     }
 
+
+    public function bukterimakep($no_permohonan_informasi)
+    {
+        $data = PermohonanInformasi::where('no_permohonan_informasi', $no_permohonan_informasi)->firstOrFail();
+        $waktu = Carbon::parse($data->tandaBuktiPenerimaan->tandaKeputusan->buktiPenerimaan->waktu)->format('H:i');
+
+        $pdf = PDF::loadview('pdf.bukti-penerimaan-tanggapan', compact('data', 'waktu'))->setPaper('f4', 'potrait');
+        return $pdf->stream('Bukti Penerimaan Tanggapan - ' . $data->no_permohonan_informasi . '.pdf');
+    }
+
+
     public function keberatan($no_keberatan_informasi)
     {
         $data = KeberatanInformasi::where('no_keberatan_informasi', $no_keberatan_informasi)->firstOrFail();

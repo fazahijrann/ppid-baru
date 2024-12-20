@@ -43,7 +43,7 @@
                     @if (optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status === null ||
                             optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status === 'Diproses')
                         <button type="button" class="btn btn-primary" disabled>
-                            Keputusan Informasi
+                            Lihat Dokumen
                         </button>
                     @elseif (in_array(optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status, ['Diterima', 'Ditolak']))
                         <a href="{{ route('keppermohonan.pdf', $data->no_permohonan_informasi) }}" class="text-white">
@@ -51,6 +51,28 @@
                                 Lihat Dokumen
                             </button>
                         </a>
+                    @endif
+
+                    @if (in_array(optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status, ['Diterima', 'Ditolak']))
+                        <div class="d-flex justify-content-center gap-2 mt-3">
+                            <a href="{{ route('keberataninformasi.create', ['id_permohonan_informasi' => $data->id]) }}"
+                                class="btn btn-danger">
+                                Ajukan Keberatan
+                            </a>
+
+                            @if ($data->tandaBuktiPenerimaan->tandaKeputusan->buktiPenerimaan === null)
+                                <form action="{{ route('keputusan.terima', $data->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" name="action" value="terima" class="btn btn-success">
+                                        Terima Keputusan
+                                    </button>
+                                </form>
+                            @else
+                                <a href="{{ route('bukterimakep.pdf', $data->no_permohonan_informasi) }}"
+                                    class="btn btn-success">Lihat Dokumen
+                                    Penerimaan</a>
+                            @endif
+                        </div>
                     @endif
                 </div>
             </div>

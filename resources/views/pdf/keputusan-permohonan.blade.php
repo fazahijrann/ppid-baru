@@ -126,7 +126,7 @@
                 <td width="90" style="border: 1px solid black; padding: 5px;">Waktu Penyediaan</td>
                 <td width="130" style="border: 1px solid black; padding: 5px;">
                     @if ($data->tandaBuktiPenerimaan->tandaKeputusan->status === 'Diterima')
-                        {{ $data->tandabuktipenerimaan->tandakeputusan->buktiPenerimaan?->waktu }} Hari
+                        {{ $data->tandabuktipenerimaan->tandakeputusan?->waktu }} Hari
                     @endif
                 </td>
             </tr>
@@ -162,7 +162,7 @@
             <tr>
                 <td>Penyediaan informasi yang belum didokumentasikan dilakukan dalam jangka waktu
                     @if (in_array($data->tandabuktipenerimaan->tandaKeputusan?->keterangan ?? '', ['01101011', '01100100']))
-                        {{ $data->tandabuktipenerimaan->tandakeputusan->buktiPenerimaan?->waktu ?? '' }}.
+                        {{ $data->tandabuktipenerimaan->tandakeputusan?->waktu ?? '' }}.
                     @endif
                 </td>
             </tr>

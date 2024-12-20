@@ -245,7 +245,9 @@
                                             <option value="">Pilih Salah Satu</option>
                                             @foreach ($keputusanInformasi as $data)
                                                 @if ($data->tandaBukti->permohonaninformasibukti->id_pemohon === Auth::id())
-                                                    <option value="{{ $data->id }}">
+                                                    <option value="{{ $data->id }}"
+                                                        {{ $data->id == $idPermohonanInformasi ? 'selected' : '' }}>
+
                                                         {{ $data->tandaBukti->permohonaninformasibukti->no_permohonan_informasi }},
                                                         Status
                                                         {{ $data->status }}

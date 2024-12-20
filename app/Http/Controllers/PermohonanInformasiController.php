@@ -169,4 +169,23 @@ class PermohonanInformasiController extends Controller
         // Redirect setelah data tersimpan
         return redirect()->back()->with('success', 'Permohonan informasi berhasil diperbarui');
     }
+
+    public function terimaKeputusan(Request $request, $id)
+    {
+        $data = PermohonanInformasi::with(['tandaBuktiPenerimaan.tandaKeputusan.buktiPenerimaan'])->findOrFail($id);
+
+        $tanda = $data->tandaBuktiPenerimaan;
+        $keputusan = $tanda->tandaKeputusan;
+        // $bukti = $keputusan->buktiPenerimaan;
+        if ($request->input('action') === 'terima') {
+            $keputusan->buktiPenerimaan()->create([
+                'keputusan_informasi_id' => $keputusan->id,
+                'waktu' => now(),
+                'tgl_penerimaan' => now(),
+            ]);
+        }
+
+        // dd($request->all());
+        return redirect()->route('cek');
+    }
 }
