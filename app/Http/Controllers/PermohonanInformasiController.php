@@ -117,13 +117,12 @@ class PermohonanInformasiController extends Controller
         // Validasi data dari form
         $validatedData = $request->validate([
             'no_permohonan_informasi' =>  'required',
-            'rincian_informasi' => 'required|string',
-            'tujuan_informasi' => 'required|string',
+            'rincian_informasi' => 'required|string|max:100',
+            'tujuan_informasi' => 'required|string|max:100',
             'id_kategori_memperoleh' => 'required|exists:kategori_memperoleh,id',
             'id_kategori_salinan' => 'required|exists:kategori_salinan,id',
             'pernyataan' => 'required|boolean',
         ]);
-
         // Ambil data pemohon berdasarkan user yang sedang login
         $pemohon = Pemohon::find(Auth::id()); // Menggunakan Eloquent untuk mengambil data pemohon
         if (!$pemohon) {
