@@ -60,6 +60,12 @@ class PdfController extends Controller
     {
         $data = KeberatanInformasi::where('no_keberatan_informasi', $no_keberatan_informasi)->firstOrFail();
 
+        $waktu_diberikan = $data->waktu_diberikan
+            ? Carbon::parse($data->waktu_diberikan)->format('d - m - Y')
+            : null;
+
+        // dd($data);
+
         $kategorikeb = [
             1 => 'Permohonan Informasi di tolak.',
             2 => 'Informasi berkala tidak disediakan',
@@ -71,7 +77,7 @@ class PdfController extends Controller
         ];
 
 
-        $pdf = PDF::loadview('pdf.form-keber', compact('data', 'kategorikeb'))->setPaper('f4', 'potrait');
+        $pdf = PDF::loadview('pdf.form-keber', compact('data', 'kategorikeb', 'waktu_diberikan'))->setPaper('f4', 'potrait');
         return $pdf->stream('Keberatan Informasi - ' . $data->no_keberatan_informasi . '.pdf');
     }
 

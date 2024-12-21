@@ -238,10 +238,10 @@
                                     <legend class="w-auto p-2 text-white bg-primary rounded">NOMOR PERMOHONAN INFORMASI
                                         *</legend>
                                     <div class="form-group mb-3">
-                                        <label for="id_permohonan_informasi" class="text-dark fw-bold">Nomor
+                                        <label for="keputusan_informasi_id" class="text-dark fw-bold">Nomor
                                             Permohonan Informasi</label>
-                                        <select name="id_permohonan_informasi" class="form-control bg-white"
-                                            id="id_permohonan_informasi">
+                                        <select name="keputusan_informasi_id" class="form-control bg-white"
+                                            id="keputusan_informasi_id">
                                             <option value="">Pilih Salah Satu</option>
                                             @foreach ($keputusanInformasi as $data)
                                                 @if ($data->tandaBukti->permohonaninformasibukti->id_pemohon === Auth::id())

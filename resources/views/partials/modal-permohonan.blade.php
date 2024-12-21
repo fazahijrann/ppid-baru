@@ -55,7 +55,7 @@
 
                     @if (in_array(optional($data->tandaBuktiPenerimaan->tandaKeputusan)->status, ['Diterima', 'Ditolak']))
                         <div class="d-flex justify-content-center gap-2 mt-3">
-                            <a href="{{ route('keberataninformasi.create', ['id_permohonan_informasi' => $data->id]) }}"
+                            <a href="{{ route('keberataninformasi.create', ['keputusan_informasi_id' => $data->tandaBuktiPenerimaan->tandaKeputusan->id]) }}"
                                 class="btn btn-danger">
                                 Ajukan Keberatan
                             </a>

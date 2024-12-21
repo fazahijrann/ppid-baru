@@ -186,6 +186,7 @@ class PermohonanInformasiController extends Controller
         }
 
         // dd($request->all());
+        // return redirect()->route('bukterimakep.pdf', $data->no_permohonan_informasi);
         return redirect()->route('cek');
     }
 }

@@ -153,7 +153,13 @@
         <table>
             <tr>
                 <td><strong>D. HARI/TANGGAL TANGGAPAN ATAS KEBERATAN AKAN DIBERIKAN : </strong>
-                    {{-- {{ $data->keputusanInformasi->buktiPenerimaan->waktu }} --}}
+                    {{-- @if (!empty($waktu_diberikan)) --}}
+                    {{-- {{ $waktu_diberikan }} --}}
+                    {{-- @endif --}}
+                    {{-- {{ $waktu_diberikan }} --}}
+                    @isset($waktu_diberikan)
+                        {{ $waktu_diberikan }}
+                    @endisset
                 </td>
             </tr>
         </table>

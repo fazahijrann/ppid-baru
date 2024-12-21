@@ -30,7 +30,8 @@ class KeberatanController extends Controller
         // $keputusanInformasi = KeputusanInformasi::with('tandaBukti', 'tandaBukti.permohonaninformasibukti')
         //     ->whereIn('status', ['Diterima', 'Ditolak'])
         //     ->get();
-        $idPermohonanInformasi = $request->input('id_permohonan_informasi'); // Ambil parameter
+        $idPermohonanInformasi = $request->input('keputusan_informasi_id'); // Ambil parameter
+
         $keputusanInformasi = KeputusanInformasi::with('tandabukti', 'tandabukti.permohonaninformasibukti')
             ->whereIn('status', ['Ditolak', 'Diterima'])
             ->get();
@@ -68,11 +69,11 @@ class KeberatanController extends Controller
         // Validasi form
         $request->validate([
             'kategori_keberatan_id' => 'required|exists:kategori_keberatan,id',
-            'id_permohonan_informasi' => 'required|exists:keputusan_informasi,id', // Validasi id_keputusan
+            'keputusan_informasi_id' => 'required|exists:keputusan_informasi,id', // Validasi id_keputusan
         ]);
 
         // Ambil keputusan berdasarkan ID yang dipilih
-        $keputusan = KeputusanInformasi::find($request->id_permohonan_informasi);
+        $keputusan = KeputusanInformasi::find($request->keputusan_informasi_id);
 
         // Pastikan keputusan ditemukan
         if (!$keputusan) {

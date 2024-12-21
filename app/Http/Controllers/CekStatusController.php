@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pemohon;
-use App\Models\PermohonanInformasi;
-use App\Models\KeberatanInformasi;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\KeberatanInformasi;
+use App\Models\KeputusanInformasi;
+use App\Models\PermohonanInformasi;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CekStatusController extends Controller
 {
@@ -25,6 +27,10 @@ class CekStatusController extends Controller
         //     ->select('no_permohonan_informasi', 'rincian_informasi', 'tgl_permohonan', 'created_at')
         //     ->get();
 
+        $keputusanInformasi = KeputusanInformasi::with('tandabukti', 'tandabukti.permohonaninformasibukti')
+            ->whereIn('status', ['Ditolak', 'Diterima'])
+            ->get();
+
         $permohonan_informasi = PermohonanInformasi::with([
             'kategoriMemperoleh',
             'kategoriSalinan',
@@ -40,7 +46,7 @@ class CekStatusController extends Controller
             ->get();
 
         // Kirim data ke view
-        return view('cek', compact('pemohon', 'permohonan_informasi', 'keberatan_informasi'));
+        return view('cek', compact('pemohon', 'permohonan_informasi', 'keberatan_informasi', 'keputusanInformasi'));
     }
 
     public function showCekStatus()
